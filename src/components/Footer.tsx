@@ -4,7 +4,7 @@ import { Flex, Heading, Text, Box } from "@chakra-ui/react";
 // The number of columns change by resizing the window
 const Footer = () => {
   return (
-    <>
+    <Box pb='2rem'>
       <Box w="100%" h="100%" py="4rem">
         <Flex
           alignItems={"center"}
@@ -29,7 +29,7 @@ const Footer = () => {
         minH={"2.5em"}
         border={"1px solid rgba(255,255,255,.15)"}
         borderRadius={"12px"}
-        justifyContent={"flex-start"}
+        justifyContent={"space-between"}
         alignItems={"center"}
         mt="24px"
         p={"16px 24px"}
@@ -38,7 +38,7 @@ const Footer = () => {
         <Text>©Brianna Bennett. All Rights Reserved.</Text>
         <Text mb="1rem">©2024</Text>
       </Flex>
-    </>
+    </Box>
   );
 };
 
