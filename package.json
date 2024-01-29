@@ -16,9 +16,19 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@fontsource-variable/inter-tight": "^5.0.19",
+    "@fontsource-variable/league-gothic": "^5.0.18",
+    "@fontsource-variable/raleway": "^5.0.17",
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@mdx-js/react": "^3.0.0",
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^1.0.38",
+    "@studio-freight/lenis": "^1.0.33",
+    "framer-motion": "^10.16.16",
     "gatsby": "^5.13.0",
     "gatsby-plugin-emotion": "^8.13.0",
     "gatsby-plugin-image": "^3.13.0",
@@ -28,8 +38,12 @@
     "gatsby-source-filesystem": "^5.13.0",
     "gatsby-source-sanity": "^7.9.1",
     "gatsby-transformer-sharp": "^5.13.0",
+    "lottie-web": "^5.12.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-bodymovin": "^2.0.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-responsive-masonry": "^2.1.7"
   },
   "devDependencies": {
     "@types/node": "^20.3.3",
