@@ -1,43 +1,47 @@
+import React, { useState } from "react";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-
-import React from "react"
-import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
-import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image"
+import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
 
 // The number of columns change by resizing the window
 const Gallery = (images: any) => {
-   // console.log('sda', images, images.allFile)
-    // const items = Array.from({ length: 20 }).map((_, index) => (
-    //     <div
-    //       key={index}
-    //       style={{
-    //         height: index % 2 ? "200px" : "250px",
-    //         background: "#" + Math.floor(Math.random() * 16777215).toString(16),
-    //         margin: "10px",
-    //         borderRadius: "8px"
-    //       }}
-    //     />
-    //   ));
-    const items = images.images.allFile.edges.map((edge: { childImageSharp: { fluid: IGatsbyImageData } }, index:number) => {
-       // console.log('edge', edge)
-       //const image = getImage(data.blogPost.avatar)
-        console.log("ssda",edge.node)
-        return <GatsbyImage  image={edge.node.childImageSharp.gatsbyImageData} alt={``} key={index}      style={{
-         
+
+  const fetchMoreData = () => {
+      setTimeout(() => {
+         items.concat(Array.from({ length: 20 }));
+      }, 1500);
+  };
+  const items = images.images.allFile.edges.map(
+    (edge: { childImageSharp: { fluid: IGatsbyImageData } }, index: number) => {
+      // console.log('edge', edge)
+      //const image = getImage(data.blogPost.avatar)
+      console.log("ssda", edge.node);
+      return (
+        <GatsbyImage
+          image={edge.node.childImageSharp.gatsbyImageData}
+          alt={``}
+          key={index}
+          style={{
             margin: "10px",
-           
-          }}/>
-     })
-        return (
-            <ResponsiveMasonry
-                columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
-            >
-                <Masonry gutter="10px">
-                {items}
-                </Masonry>
-            </ResponsiveMasonry>
-        )
-    }
+          }}
+        />
+      );
+    },
+  );
+  return (
+    <InfiniteScroll
+    dataLength={items.length}
+    next={fetchMoreData}
+    hasMore={true}
+    loader={<h4>Loading...</h4>}
+>
+    <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+      <Masonry gutter="10px">{items}</Masonry>
+    </ResponsiveMasonry>
+    </InfiniteScroll>
+  );
 
+};
 
-export default Gallery
+export default Gallery;

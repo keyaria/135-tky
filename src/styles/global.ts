@@ -1,14 +1,12 @@
-import { css } from '@emotion/react'
-import "@fontsource-variable/raleway"
-import '@fontsource-variable/league-gothic';
-import { Global } from '@emotion/react';
-import '@fontsource-variable/inter-tight';
+import { css } from "@emotion/react";
+import "@fontsource-variable/raleway";
+import "@fontsource-variable/league-gothic";
+import { Global } from "@emotion/react";
+import "@fontsource-variable/inter-tight";
 
 //import { colors } from 'styles.colors'
 // import AvenirStd from '../fonts/AvenirLTStd-Roman.otf'
 // import AvenirBlack from '../fonts/AvenirLTStd-Black.otf'
-
-
 
 // const Fonts = () => (
 //   <Global
@@ -22,7 +20,7 @@ import '@fontsource-variable/inter-tight';
 //         font-named-instance: 'Regular';
 //         src: url(/fonts/arges-variable-wght-wdth-slnt.ttf) format("ttf");
 //       }
-      
+
 //       /* latin */
 //       @font-face {
 //         font-family: 'Body Font Name';
@@ -61,7 +59,7 @@ export const globalStyles = css`
   }
   
 
-}`
+}`;
 
 //  // Using our theme colour to style h2
 //   h2 {

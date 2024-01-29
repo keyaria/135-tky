@@ -1,12 +1,10 @@
-import lottieWeb from 'lottie-web';
+import lottieWeb from "lottie-web";
 
 var animation = lottieWeb.loadAnimation({
-  container: document.getElementById('anim'),
-  path: 'https://assets9.lottiefiles.com/packages/lf20_yb9dhl1b.json',
-  renderer: 'svg',
+  container: document.getElementById("anim"),
+  path: "https://assets9.lottiefiles.com/packages/lf20_yb9dhl1b.json",
+  renderer: "svg",
   loop: false,
   autoplay: false,
   name: "Demo Animation",
 });
-
-

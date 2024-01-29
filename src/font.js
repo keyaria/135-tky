@@ -1,5 +1,5 @@
-import { Global } from '@emotion/react'
-import * as React from "react"
+import { Global } from "@emotion/react";
+import * as React from "react";
 
 const Fonts = () => (
   <Global
@@ -76,6 +76,6 @@ const Fonts = () => (
            font-style: normal;
       `}
   />
-)
+);
 
-export default Fonts
+export default Fonts;
