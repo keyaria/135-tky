@@ -197,14 +197,15 @@ const IndexPage: React.FC<PageProps> = () => {
             {/* <div id="lottie"></div> */}
             {/* <ReactBodymovin options={bodymovinOptions} /> */}
             {/* <iframe src="https://lottie.host/embed/199ade72-150b-4d17-b80e-f9f3addf810d/prdoptz80P.json"></iframe> */}
+            <Show above="sm">
             <Player
               autoplay
               loop={false}
               keepLastFrame={true}
               src={
-                isLargerThan500
-                  ? "https://lottie.host/982bad1a-8500-446d-83f6-ca3050c33924/f5fjjVnCHE.json"
-                  : "https://lottie.host/ea0bd5b6-0469-4f0c-856a-9dcc03366c3e/16p6YTtTL3.json"
+         
+                   "https://lottie.host/982bad1a-8500-446d-83f6-ca3050c33924/f5fjjVnCHE.json"
+       
               }
               style={player}
               ref={playerRef}
@@ -212,6 +213,23 @@ const IndexPage: React.FC<PageProps> = () => {
                 if (event === "complete") startAnimation(); // check event type and do something
               }}
             />
+            </Show>
+            <Show below="md">
+            <Player
+              autoplay
+              loop={false}
+              keepLastFrame={true}
+              src={
+                "https://lottie.host/ea0bd5b6-0469-4f0c-856a-9dcc03366c3e/16p6YTtTL3.json"
+              }
+              style={player}
+              ref={playerRef}
+              onEvent={(event) => {
+                if (event === "complete") startAnimation(); // check event type and do something
+              }}
+            />
+            </Show>
+            
             {/* initial={{ opacity: 0, scale: 0.5 }}
     animate={{ opacity: 1, scale: 1 }}
 transition={{ duration: 10 }}*/}
