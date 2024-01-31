@@ -1,15 +1,13 @@
 //import styles from './page.module.css'
 
-import { Image, Button, Text } from "@chakra-ui/react";
+import { Image, Button, Text, Flex } from "@chakra-ui/react";
 import { Box, Heading, Link } from "@chakra-ui/react";
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 
 const cardContainer = {
   width: "93vw",
-  height: "100vh",
-
   alignItems: "center",
   justifyContent: "center",
   position: "sticky",
@@ -25,7 +23,6 @@ const CardBox = styled.div`
   display: flex;
   position: relative;
   border-radius: 15px;
-  height: 90%;
 
   justify-content: space-between;
   align-items: center;
@@ -38,8 +35,6 @@ const CardBox = styled.div`
 
 const body = {
   display: "flex",
-
-  flexDirection: "row",
 
   height: "100%",
 
@@ -55,8 +50,6 @@ const descriptionBox = {
 const imageContainer = {
   position: "relative",
 
-  width: "50%",
-
   height: "100%",
 
   // borderRadius: '25px',
@@ -71,25 +64,36 @@ const InnerBox = styled.div`
 const Card = ({ title, description, src, url, color, i, buttonText, link }) => {
   const container = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    //What we want to track
-    target: container,
-    // When do we want to start  tracking and stoping
-    offset: ["start end", "end start"],
-  });
+  // const { scrollYProgress } = useScroll({
+  //   //What we want to track
+  //   target: container,
+  //   // When do we want to start  tracking and stoping
+  //   offset: ["start end", "end start"],
+  // });
 
   // const imageScale = useTransform(scrollYProgress, [0, 1], [2, 1])
   // const cardScale = useTransform(scrollYProgress,[0, 1], [1, 1] )
 
   return (
-    <Box ref={container} style={cardContainer}>
-      <CardBox
+    <Box
+      ref={container}
+      style={cardContainer}
+      h={{ base: "80vh", md: "100vh" }}
+    >
+      <Flex
         as={motion.div}
+        pos="relative"
+        borderRadius="15px"
+        h="90%"
+        justifyContent="space-between"
+        alignItems="center"
+        flexDirection={{ base: "column", md: "row" }}
+        color="#292929"
         //style={{scale: cardScale}}
 
         css={{ backgroundColor: color, top: `calc(-5vh + ${i * 40}px)` }}
       >
-        <Box style={body}>
+        <Box style={body} flexDirection={{ base: "column", md: "row" }}>
           <Box style={descriptionBox}>
             <Heading
               textAlign="left"
@@ -100,7 +104,7 @@ const Card = ({ title, description, src, url, color, i, buttonText, link }) => {
             >
               {title}
             </Heading>
-            <Text fontSize='clamp(0.3rem, 2vw , 1rem)' >{description}</Text>
+            <Text fontSize="clamp(0.8rem, 2vw , 1rem)">{description}</Text>
 
             <Link href={link}>
               {" "}
@@ -116,7 +120,7 @@ const Card = ({ title, description, src, url, color, i, buttonText, link }) => {
             </Link>
           </Box>
 
-          <Box style={imageContainer}>
+          <Box style={imageContainer} w={{ base: "100%", md: "50%" }}>
             {/* css={{scale: imageScale}} style={{scale: imageScale}} */}
             <InnerBox as={motion.div}>
               <Image
@@ -131,7 +135,7 @@ const Card = ({ title, description, src, url, color, i, buttonText, link }) => {
             </InnerBox>
           </Box>
         </Box>
-      </CardBox>
+      </Flex>
     </Box>
   );
 };

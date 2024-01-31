@@ -42,13 +42,14 @@ const StylingPage: React.FC<PageProps> = () => {
 
       <main style={pageStyles}>
         <Global styles={globalStyles} />
-        <WithSubnavigation />
 
-        <Flex w="100%" h="100vh" pos="relative">
+        <Flex w="100%" h="100vh" pos="relative" flexDir={"column"}>
+          <WithSubnavigation />
+
           <Image src={linesImg} pos="absolute" />
           <Flex
-            w="50%"
-            alignItems={"end"}
+            w={{ base: "100%", md: "50%" }}
+            alignItems={{ base: "center", md: "end" }}
             justifyItems={"center"}
             p="0 3rem 3rem 3rem"
             zIndex={"10"}
@@ -57,7 +58,7 @@ const StylingPage: React.FC<PageProps> = () => {
             <Image src={img_0Img} />
           </Flex>
         </Flex>
-
+        {/* 
         <AspectRatio ratio={1}>
           <iframe
             src="https://drive.google.com/file/d/1VjXDquUZsQr6g_VsAls9Ds46QRaEkbbD/preview"
@@ -65,7 +66,7 @@ const StylingPage: React.FC<PageProps> = () => {
             height="480"
             allow="autoplay"
           ></iframe>
-        </AspectRatio>
+        </AspectRatio> */}
         <Box bg="black">
           <Gallery images={data} />
         </Box>

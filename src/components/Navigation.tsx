@@ -24,6 +24,7 @@ import {
 } from "@chakra-ui/icons";
 import React from "react";
 import { motion } from "framer-motion";
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
@@ -37,7 +38,7 @@ export default function WithSubnavigation() {
         align={"center"}
         color={"#bfea88"}
       >
-        <Flex
+        {/* <Flex
           flex={{ base: 1, md: "auto" }}
           ml={{ base: -2 }}
           display={{ base: "flex", md: "none" }}
@@ -50,7 +51,7 @@ export default function WithSubnavigation() {
             variant={"ghost"}
             aria-label={"Toggle Navigation"}
           />
-        </Flex>
+        </Flex> */}
         <Flex
           flex={{ base: 1 }}
           justify={{ base: "center", md: "start" }}
@@ -75,7 +76,11 @@ export default function WithSubnavigation() {
               Instagram
             </Text>
 
-            <Heading as={"h3"} color={"#bfea88"} fontSize={"3rem"}>
+            <Heading
+              as={"h3"}
+              color={"#bfea88"}
+              fontSize={`clamp(1.5rem, 14vw , 5rem)`}
+            >
               {" "}
               INFO
             </Heading>
@@ -95,23 +100,38 @@ export default function WithSubnavigation() {
           color={"#bfea88"}
           flex={{ base: 1 }}
         >
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            textAlign={"right"}
-            fontWeight={"500"}
-          >
-            Works
-          </Text>
-          <Heading
-            as={"h3"}
-            color={"#bfea88"}
-            fontSize={"3rem"}
-            textAlign={"right"}
-          >
-            {" "}
-            WORKS
-          </Heading>
+          <AniLink paintDrip color={"#202020"} to="/135tky">
+            {/* 
+                    <Link
+            as={motion.a}
+            textDecoration={"none"}
+            initial={{ left: "-100%" }}
+            whileHover={{ left: "0%" }}
+            transition={{
+              duration: 0.5,
+              ease: [0.7, 0, 0.3, 1],
+            }}
+            href="/135tky"
+
+            > */}
+            <Text
+              textAlign={useBreakpointValue({ base: "center", md: "left" })}
+              fontFamily={"heading"}
+              textAlign={"right"}
+              fontWeight={"500"}
+            >
+              Works
+            </Text>
+            <Heading
+              as={"h3"}
+              color={"#bfea88"}
+              fontSize={`clamp(1.5rem, 14vw , 5rem)`}
+              textAlign={"right"}
+            >
+              {" "}
+              WORKS
+            </Heading>
+          </AniLink>
         </Stack>
       </Flex>
 

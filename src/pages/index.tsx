@@ -4,28 +4,27 @@ import { Global } from "@emotion/react";
 import { globalStyles } from "../styles/global";
 import {
   Box,
-  Button,
   Center,
   ChakraProvider,
   Flex,
   HStack,
-  IconButton,
   Spacer,
-  Stack,
   Text,
   VStack,
   chakra,
-  useColorModeValue,
   Image,
   Grid,
   Icon,
+  Show,
+  Hide,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import heroImage from "../images/heroImage.png";
 import showImg from "../images/IMG_8539.jpeg";
 import rightsImg from "../images/rights.jpg";
 import img_0Img from "../images/img_0.png";
 import socialImg from "../images/social.jpg";
-import stylingImg from "../images/Website/Self Kimono Shoot 3.jpg"
+import stylingImg from "../images/Website/Self Kimono Shoot 3.jpg";
 import { Heading } from "@chakra-ui/react";
 import { AiOutlineMenu } from "react-icons/ai";
 import WithSubnavigation from "../components/Navigation";
@@ -33,8 +32,10 @@ import WithSubnavigation from "../components/Navigation";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Card from "../components/Cards";
 import { useEffect, useRef, useState } from "react";
-import { useScroll, motion } from "framer-motion";
+import { useScroll, motion, Variants, useAnimation } from "framer-motion";
 import Lenis from "@studio-freight/lenis";
+import { useInView } from "react-intersection-observer";
+
 import styled from "@emotion/styled";
 
 import Spline from "@splinetool/react-spline";
@@ -56,43 +57,6 @@ const linkStyle = {
   fontWeight: "bold",
   fontSize: 16,
   verticalAlign: "5%",
-};
-
-const docLinkStyle = {
-  ...linkStyle,
-  listStyleType: "none",
-  display: `inline-block`,
-  marginBottom: 24,
-  marginRight: 12,
-};
-
-const descriptionStyle = {
-  color: "#232129",
-  fontSize: 14,
-  marginTop: 10,
-  marginBottom: 0,
-  lineHeight: 1.25,
-};
-
-const badgeStyle = {
-  color: "#fff",
-  backgroundColor: "#088413",
-  border: "1px solid #088413",
-  fontSize: 11,
-  fontWeight: "bold",
-  letterSpacing: 1,
-  borderRadius: 4,
-  padding: "4px 6px",
-  display: "inline-block",
-  position: "relative" as "relative",
-  top: -2,
-  marginLeft: 10,
-  lineHeight: 1,
-};
-
-const MainBox = {
-  height: "100%",
-  width: "100%",
 };
 
 const player = {
@@ -152,22 +116,44 @@ export const projects = [
     buttonText: "Get In Contact",
   },
 ];
+const fadeInUpAnimation: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.3,
+      duration: 1.5,
+    },
+  },
+};
 const IndexPage: React.FC<PageProps> = () => {
-  useEffect(() => {
-    const lenis = new Lenis();
-
-    function raf(time: any) {
-      lenis.raf(time);
-
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-  });
-  //const bg = useColorModeValue("white", "gray.800");
-  const container = useRef(null);
+  const controls = useAnimation();
   const [isFinished, setIsFinished] = useState(false);
+  const container = useRef(null);
   const playerRef = useRef();
+  const [ref, inView] = useInView();
+  const [isLargerThan500] = useMediaQuery("(min-width: 500px)");
+
+  useEffect(() => {
+    // const lenis = new Lenis();
+
+    // function raf(time: any) {
+    //   lenis.raf(time);
+    if (inView) {
+      controls.start("show");
+    } else {
+      controls.start("hidden");
+    }
+    //   requestAnimationFrame(raf);
+    // }
+
+    // requestAnimationFrame(raf);
+  }, [controls, inView]);
+  //const bg = useColorModeValue("white", "gray.800");
 
   const startAnimation = () => {
     setIsFinished(true); // make use of the player and call methods
@@ -182,6 +168,7 @@ const IndexPage: React.FC<PageProps> = () => {
     ["ul", { opacity: 1 }],
     ["li", { x: [-100, 0] }, { at: 1 }],
   ];
+
   return (
     <ChakraProvider>
       <Fonts />
@@ -214,7 +201,11 @@ const IndexPage: React.FC<PageProps> = () => {
               autoplay
               loop={false}
               keepLastFrame={true}
-              src="https://lottie.host/64597563-ab24-40b0-9792-7fcaad335840/v8VtVmoofC.json"
+              src={
+                isLargerThan500
+                  ? "https://lottie.host/982bad1a-8500-446d-83f6-ca3050c33924/f5fjjVnCHE.json"
+                  : "https://lottie.host/ea0bd5b6-0469-4f0c-856a-9dcc03366c3e/16p6YTtTL3.json"
+              }
               style={player}
               ref={playerRef}
               onEvent={(event) => {
@@ -227,8 +218,11 @@ transition={{ duration: 10 }}*/}
             {isFinished && (
               <Box
                 zIndex={100}
-                h="90vh"
+                h="100%"
                 as={motion.div}
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"space-between"}
                 animate={
                   !isFinished
                     ? { opacity: 0, scale: 0.5 }
@@ -237,23 +231,43 @@ transition={{ duration: 10 }}*/}
               >
                 <WithSubnavigation />
 
-                <Center flexDir="column" h="70%" zIndex={100}>
+                <Center flexDir="column" h="60%" zIndex={100}>
+                  <Show below="md">
+                    <Heading
+                      as="h1"
+                      fontSize="8rem"
+                      textAlign="center"
+                      mb="0"
+                      fontWeight="700"
+                      textTransform={"uppercase"}
+                      color="#bfea88"
+                    >
+                      Brianna Bennett
+                    </Heading>
+                  </Show>
                   {/* <Heading as="h1" fontSize='8rem' textAlign="center" mb='0' fontWeight='700' textTransform={'uppercase'}  color='#bfea88'
 >Brianna Bennett</Heading> */}
-                  <Spline scene="https://prod.spline.design/sYQGKl6Q5k8rUhYA/scene.splinecode" />{" "}
+                  <Hide below="md">
+                    <Spline
+                      scene="https://prod.spline.design/sYQGKl6Q5k8rUhYA/scene.splinecode"
+                      w="auto"
+                    />{" "}
+                  </Hide>
                 </Center>
-                <Flex h="30%" pb="2em" paddingX="2em" color="#bfea88">
-                  <Heading
-                    w="300px"
-                    textAlign="center"
-                    m="auto"
-                    fontWeight="900"
-                    fontSize="2rem"
-                    color="#bfea88"
-                  >
-                    {" "}
-                    Based In <br /> Tokyo
-                  </Heading>
+                <Flex h="30%" pb="2em" paddingX="1em" color="#bfea88">
+                  <Show above="sm">
+                    <Heading
+                      w="300px"
+                      textAlign="center"
+                      m="auto"
+                      fontWeight="900"
+                      fontSize="2rem"
+                      color="#bfea88"
+                    >
+                      {" "}
+                      Based In <br /> Tokyo
+                    </Heading>
+                  </Show>
                   <Spacer />
                   <VStack
                     w="600px"
@@ -269,13 +283,13 @@ transition={{ duration: 10 }}*/}
                       Working on projects for
                     </Text>
                     <HStack spacing="18px" justifyContent="center">
-                      <chakra.a fontSize="2vw" fontWeight="900">
+                      <chakra.a fontSize="lg" fontWeight="900">
                         Fashion
                       </chakra.a>{" "}
-                      <chakra.a fontSize="2vw" fontWeight="900">
+                      <chakra.a fontSize="lg" fontWeight="900">
                         Social Media
                       </chakra.a>{" "}
-                      <chakra.a fontSize="2vw" fontWeight="900">
+                      <chakra.a fontSize="lg" fontWeight="900">
                         Digital
                       </chakra.a>{" "}
                     </HStack>
@@ -286,16 +300,18 @@ transition={{ duration: 10 }}*/}
                     </Text>
                   </VStack>
                   <Spacer />
-                  <Box
-                    w="300px"
-                    bg="black"
-                    borderRadius="10%"
-                    overflow={"hidden"}
-                    m="0 4rem 1rem 0"
-                  >
-                    {/* <chakra.img src='../images/IMG_8539.jpeg' w='600px' h='500px' /> */}
-                    <Image src={showImg} bg="gray.400" m="auto 0" />
-                  </Box>
+                  <Show above="sm">
+                    <Box
+                      w="300px"
+                      bg="black"
+                      borderRadius="10%"
+                      overflow={"hidden"}
+                      m="0 4rem 1rem 0"
+                    >
+                      {/* <chakra.img src='../images/IMG_8539.jpeg' w='600px' h='500px' /> */}
+                      <Image src={showImg} bg="gray.400" m="auto 0" />
+                    </Box>
+                  </Show>
                 </Flex>
               </Box>
             )}
@@ -306,14 +322,22 @@ transition={{ duration: 10 }}*/}
         <Box w="100%" h="100vh" paddingX="2em" position="relative" py="4rem">
           <Box w="100%" h="1px" bg="white" mb="1em"></Box>
           <Grid
-            gridTemplateColumns={"1fr 1fr"}
+            gridTemplateColumns={{ md: "1fr 1fr" }}
             gridAutoColumns={"1fr"}
             gridTemplateRows={"auto"}
           >
             <Box>
               <Heading as={"h2"}>ABOUT ME</Heading>
             </Box>
-            <Text color="white" fontSize={"2rem"}>
+            <Text
+              as={motion.p}
+              color="white"
+              fontSize={`clamp(1rem, 2rem , 2rem)`}
+              initial="hidden"
+              animate={controls}
+              variants={fadeInUpAnimation}
+              ref={ref}
+            >
               Originally from Chicago,IL USA I moved to Japan in 2017 where I
               worked as an English teacher for three years before transitioning
               into the creative arts field. Through my exploration I discovered
@@ -329,7 +353,7 @@ transition={{ duration: 10 }}*/}
         <Box w="100%" h="100%" paddingX="2em" position="relative" py="4rem">
           <Box w="100%" h="1px" bg="white" mb="1em"></Box>
           <Grid
-            gridTemplateColumns={"1fr 1fr"}
+            gridTemplateColumns={{ md: "1fr 1fr" }}
             gridAutoColumns={"1fr"}
             gridTemplateRows={"auto"}
           >
@@ -469,7 +493,11 @@ transition={{ duration: 10 }}*/}
         </Box>
         {/* WORKS */}
         <SectionBox ref={container}>
-          <Text color="white" textAlign="center" fontSize="10rem">
+          <Text
+            color="white"
+            textAlign="center"
+            fontSize={{ base: "8rem", md: "10rem" }}
+          >
             Works
           </Text>
           {projects.map((project, i) => {

@@ -23,6 +23,7 @@ const config: GatsbyConfig = {
     "gatsby-plugin-emotion",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-mdx",
+    "gatsby-plugin-transition-link",
     {
       resolve: "gatsby-source-filesystem",
       options: {
