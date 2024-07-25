@@ -5,8 +5,8 @@ const Fonts = () => (
   <Global
     styles={`
     @font-face {
-      font-family: 'Arges';
-      src: url('./fonts/arges-variable-wght-wdth-slnt.ttf') format('truetype');
+      font-family: 'TulpenOne-Regular';
+      src: url('./fonts/TulpenOne-Regular.ttf') format('truetype');
            font-weight: 200 700;
            font-display: swap;
            font-style: normal;
@@ -35,13 +35,6 @@ const Fonts = () => (
     }
     
     
-    @font-face {
-      font-family: 'Arges Condensed Regular';
-      src:url('./fonts/arges-variable-wght-wdth-slnt.ttf') format('truetype');
-           font-weight: 400;
-           font-display: swap;
-           font-style: normal;
-    }
     
     
     @font-face {

@@ -35,12 +35,12 @@ import "@fontsource-variable/inter-tight";
 // )
 export const globalStyles = css`
 @font-face {
-  font-family: 'Arges';
+  font-family: 'TulpenOne';
   font-weight: 100 200 300 900;
   font-display: swap;
   font-style: condensed;
   font-named-instance: 'Regular';
-  src: url(../fonts/arges-variable-wght-wdth-slnt.ttf) format("ttf");
+  src: url(../fonts/TulpenOne-Regula.ttf) format("ttf");
 }
 
   body {
@@ -54,7 +54,7 @@ export const globalStyles = css`
 
   h1, h2, h3 {
     color: white;
-    font-family: 'Arges', sans-serif !important;
+    font-family: 'TulpenOne', sans-serif !important;
 
   }
   

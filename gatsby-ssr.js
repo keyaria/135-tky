@@ -4,11 +4,11 @@ export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     <link
       rel="preload"
-      href="/fonts/arges-variable-wght-wdth-slnt.ttf"
+      href="/fonts/TulpenOne-Regular.ttf"
       as="font"
       type="font/ttf"
       crossOrigin="anonymous"
-      key="Arges"
+      key="TulpenOne"
     />,
   ]);
 };
